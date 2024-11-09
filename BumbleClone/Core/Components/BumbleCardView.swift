@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BumbleCardView: View {
     
-    var user: User = .users[0]
+    var user: User
     @State private var cardFrame: CGRect = .zero
     
     var onSuperLikePressed: (()-> Void)? = nil
@@ -34,10 +34,14 @@ struct BumbleCardView: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 24)
 
-                ForEach(user.images, id: \.self) { image in
-                    ImageLoaderView(urlString: image)
-                        .frame(height: cardFrame.height)
-                }
+                
+                
+                    
+                ForEach(user.otherImages, id: \.self) { image in
+                        ImageLoaderView(urlString: image)
+                            .frame(height: cardFrame.height)
+                    }
+                
                 
                 locationsection
                     .padding(.horizontal, 24)
@@ -130,7 +134,7 @@ struct BumbleCardView: View {
                 .font(.headline)
                 .foregroundStyle(.bumbleBlack)
                             
-            InterestPillView(iconName: nil, emoji: user.locationFlag, text: user.location)
+            InterestPillView(iconName: nil, emoji: "🇹🇷", text: user.city)
                             
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -184,7 +188,7 @@ struct BumbleCardView: View {
     private var headerCell: some View {
         ZStack(alignment: .bottomLeading) {
                             
-            ImageLoaderView(urlString: user.image)
+            ImageLoaderView(urlString: user.profileImage)
                             
             VStack(alignment: .leading, spacing: 8) {
                 Text("\(user.firstName), \(user.age)")
@@ -193,11 +197,11 @@ struct BumbleCardView: View {
                                 
                 HStack(spacing: 4) {
                     Image(systemName: "suitcase")
-                    Text(user.work)
+                    Text(user.profession)
                 }
                 HStack(spacing: 4) {
                     Image(systemName: "graduationcap")
-                    Text(user.education)
+                    Text(user.university)
                 }
                                 
                 BumbleHeartView()
@@ -229,7 +233,7 @@ struct BumbleCardView: View {
 }
 
 #Preview {
-    BumbleCardView()
+    BumbleCardView(user: User.users.first!)
         .padding(.vertical, 40)
         .padding(.horizontal, 16)
 }

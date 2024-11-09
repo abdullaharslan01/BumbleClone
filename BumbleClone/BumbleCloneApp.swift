@@ -11,7 +11,10 @@ import SwiftUI
 struct BumbleCloneApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationStack {
+                HomeView()
+            }
+           
         }
     }
 }

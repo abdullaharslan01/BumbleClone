@@ -27,8 +27,5 @@ struct InterestPillGridView: View {
 }
 
 #Preview {
-    VStack (spacing: 40){
-        InterestPillGridView(interests: User.users.first!.interests)
-        InterestPillGridView(interests: User.users.first!.basics)
-    }
+ 
 }
